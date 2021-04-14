@@ -11,13 +11,13 @@
             ></v-text-field>
           </v-col>
 
-          <v-col cols="12" md="4">
+          <!-- <v-col cols="12" md="4">
             <v-text-field
               label="url"
               required
               v-model="objectmanga.url"
             ></v-text-field>
-          </v-col>
+          </v-col> -->
 
           <v-col cols="12" md="4">
             <v-text-field
