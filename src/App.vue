@@ -11,10 +11,7 @@
       <v-divider></v-divider>
 
       <v-list dense nav>
-        <v-list-item v-for="item in items" 
-        :key="item.title" 
-        :to="item.to"
-        link>
+        <v-list-item v-for="item in items" :key="item.title" :to="item.to" link>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -29,24 +26,25 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Menu</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <router-view></router-view>
+      <v-container>
+        <router-view></router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
   data: () => ({
     drawer: null,
     items: [
-      { title: "Accueil", icon: "mdi-view-dashboard",to:'/' },
-      { title: "Mes mangas", icon: "mdi-book-open-variant",to:'/mangas' },
-      { title: "About", icon: "mdi-help-box",to:'/about' },
+      { title: "Accueil", icon: "mdi-view-dashboard", to: "/" },
+      { title: "Mes mangas", icon: "mdi-book-open-variant", to: "/mangas" },
+      { title: "About", icon: "mdi-help-box", to: "/about" },
     ],
     right: null,
   }),

@@ -1,37 +1,46 @@
 <template>
   <div :key="currentMangaKey">
-    <div class="text-center" v-if="mangas">
-      <div v-for="manga in mangas" :key="manga.id" @click="selectManga(manga)">
-        <!-- <v-dialog v-model="dialog[manga.id]" width="500"> -->
-        <!-- <template v-slot:activator="{ on, attrs }">
-          <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
-            Click Me
-          </v-btn>
-        </template> -->
-
+    <v-row class="d-flex justify-content-center" v-if="mangas">
+      <v-col
+        v-for="manga in mangas"
+        :key="manga.id"
+        @click="selectManga(manga)"
+        @click.stop="dialog = true"
+        cols="6"
+        md="2"
+      >
         <v-card>
           <v-card-title elevation="2" outlined shaped>
             {{ manga.titre }}
           </v-card-title>
-
-          <v-card-text>{{ manga.chapitre }}</v-card-text>
+          <v-img height="250" :src="manga.image ? manga.image : ''"></v-img>
+          <v-card-text v-if="manga.chapitre < manga.dernierchapitre"
+            >{{ manga.chapitre }}/{{ manga.dernierchapitre }}</v-card-text
+          >
+          <v-card-text v-else class="d-flex justify-space-between">
+            <span>
+              {{ manga.dernierchapitre }}
+            </span>
+            <v-icon class="ml-2 green--text">{{ icon }}</v-icon>
+          </v-card-text>
         </v-card>
-        <!-- </v-dialog> -->
-      </div>
-    </div>
+      </v-col>
+    </v-row>
 
-    <div v-if="currentManga">
-      <v-card>
-        <Form
-          :titremanga="this.currentManga.titre"
-          :chapitremanga="this.currentManga.chapitre"
-          :urlmanga="this.currentManga.url"
-          :idmanga="this.currentManga.id"
-          @formok="handleSubmit"
-          @delete="handleDelete"
-        />
-      </v-card>
-    </div>
+    <v-row v-if="currentManga">
+      <v-dialog v-model="dialog" content-class="white">
+        <v-col>
+          <Form
+            :titremanga="this.currentManga.titre"
+            :chapitremanga="this.currentManga.chapitre"
+            :urlmanga="this.currentManga.url"
+            :idmanga="this.currentManga.id"
+            @formok="handleSubmit"
+            @delete="handleDelete"
+          />
+        </v-col>
+      </v-dialog>
+    </v-row>
   </div>
 </template>
 
@@ -49,6 +58,7 @@ export default {
       dialog: [],
       currentManga: undefined,
       currentMangaKey: 0,
+      icon: "mdi-check-outline",
     };
   },
   methods: {

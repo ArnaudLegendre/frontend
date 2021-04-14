@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="form">
     <v-form v-on:submit="handleSubmit($event, objectmanga)" ref="form">
       <v-container>
         <v-row>
@@ -31,7 +31,11 @@
         <v-row>
           <v-col cols="12" md="3">
             <v-btn type="submit" v-if="this.objectmanga.id">Editer</v-btn>
-            <v-btn v-if="this.objectmanga.id" @click="$emit('delete', objectmanga.id)">SUpprimer</v-btn>
+            <v-btn
+              v-if="this.objectmanga.id"
+              @click="$emit('delete', objectmanga.id)"
+              >SUpprimer</v-btn
+            >
             <v-btn type="submit" v-else>Ajouter</v-btn>
           </v-col>
         </v-row>
@@ -68,7 +72,7 @@ export default {
     handleSubmit(e, manga) {
       e.preventDefault();
       this.$emit("formok", manga);
-      this.objectmanga={}
+      this.objectmanga = {};
     },
   },
   created() {

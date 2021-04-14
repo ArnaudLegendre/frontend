@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>Ajouter un manga</h1>
     <Form
       :titremanga="this.titre"
       :chapitremanga="this.chapitre"
@@ -20,7 +21,6 @@ export default {
       titre: "",
       url: "",
       chapitre: null,
-
       error: null,
       headers: { "Content-Type": "application/json" },
     };
@@ -38,7 +38,6 @@ export default {
       });
     },
     async handleSubmit(manga) {
-      
       try {
         const response = await fetch("http://localhost:8092/mangaas", {
           method: "POST",
@@ -47,7 +46,6 @@ export default {
         })
           .then(this.checkStatus)
           .then(this.parseJSON);
-          
       } catch (error) {
         this.error = error;
       }
